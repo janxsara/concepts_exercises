@@ -343,6 +343,19 @@ function cartTotal(cart) {
 //   isPrime(7) -> true,  isPrime(9) -> false
 // ---------------------------------------------------------------------
 function isPrime(n) {
+    if (n < 2) {
+        return false;
+    }
+
+    let divisor = 2;
+
+    while (divisor < n) {
+        if (n % divisor === 0) {
+            return false;
+        }
+        divisor++;
+    }
+    return true;
 }
 
 
@@ -353,6 +366,15 @@ function isPrime(n) {
 //   primesUpTo(10) -> [2, 3, 5, 7]
 // ---------------------------------------------------------------------
 function primesUpTo(n) {
+    let primes = [];
+
+    for (let i = 2; i <= n; i++) {
+        if (isPrime(i)) {
+            primes.push(i);
+        }
+    }
+
+    return primes;  
 }
 
 
@@ -367,6 +389,29 @@ function primesUpTo(n) {
 //     -> { wordCount: 4, longestWord: "quick" }
 // ---------------------------------------------------------------------
 function wordStatistics(sentence) {
+    let wordCount = 0;
+    let longestWord = "";
+    let word = "";
+
+    for (let i = 0; i <= sentence.length; i++) {
+        if (i === sentence.length || sentence[i] === " ") {
+            if (word.length > 0) {
+                wordCount++;
+
+                if (word.length > longestWord.length) {
+                    longestWord = word;
+                }
+                word = "";
+            }
+        } else {
+            word = word + sentence[i];
+        }
+    }
+
+    return { 
+        wordCount: wordCount,
+        longestWord: longestWord
+    };  
 }
 
 
